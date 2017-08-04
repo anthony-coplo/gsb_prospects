@@ -1,0 +1,12 @@
+{
+    "name": "gsb_prospects",
+    "description": "GSB Gestion des Prospects",
+    "version": "0.1.0",
+    "autoload": {
+        "psr-4": {
+            "gsb_prospects\\": "src/"
+        }
+    },
+    "require": {
+    }
+}
