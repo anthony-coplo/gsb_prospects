@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 03 Août 2017 à 10:44
+-- Généré le :  Lun 07 Août 2017 à 10:52
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -64,7 +64,7 @@ CREATE TABLE `praticien` (
   `prenom` varchar(25) NOT NULL,
   `adresse` varchar(255) NOT NULL,
   `id_Ville` int(11) NOT NULL,
-  `code_Type_Praticien` varchar(6) NOT NULL
+  `id_Type_Praticien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -96,10 +96,22 @@ CREATE TABLE `prospect` (
 --
 
 CREATE TABLE `type_praticien` (
+  `id` int(11) NOT NULL,
   `code` varchar(6) NOT NULL,
-  `libelle` varchar(50) NOT NULL,
-  `lieu` varchar(70) NOT NULL
+  `libelle` varchar(25) NOT NULL,
+  `lieu` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `type_praticien`
+--
+
+INSERT INTO `type_praticien` (`id`, `code`, `libelle`, `lieu`) VALUES
+(1, 'MH', 'Médecin Hospitalier', 'Hopital ou Clinique'),
+(2, 'MV', 'Médecine de Ville', 'Cabinet'),
+(3, 'PH', 'Pharmacien Hospitalier', 'Hopital ou Clinique'),
+(4, 'PO', 'Pharmacien Officine', 'Pharmacie'),
+(5, 'PS', 'Personnel de santé', 'Centre Paramédical');
 
 -- --------------------------------------------------------
 
@@ -142,7 +154,7 @@ ALTER TABLE `interesser`
 ALTER TABLE `praticien`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_Praticien_id_Ville` (`id_Ville`),
-  ADD KEY `FK_Praticien_code_Type_Praticien` (`code_Type_Praticien`);
+  ADD KEY `FK_Praticien_id_Type_Praticien` (`id_Type_Praticien`) USING BTREE;
 
 --
 -- Index pour la table `prestation`
@@ -161,7 +173,7 @@ ALTER TABLE `prospect`
 -- Index pour la table `type_praticien`
 --
 ALTER TABLE `type_praticien`
-  ADD PRIMARY KEY (`code`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `ville`
@@ -189,6 +201,11 @@ ALTER TABLE `praticien`
 ALTER TABLE `prestation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT pour la table `type_praticien`
+--
+ALTER TABLE `type_praticien`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT pour la table `ville`
 --
 ALTER TABLE `ville`
@@ -214,7 +231,7 @@ ALTER TABLE `interesser`
 -- Contraintes pour la table `praticien`
 --
 ALTER TABLE `praticien`
-  ADD CONSTRAINT `FK_Praticien_code_Type_Praticien` FOREIGN KEY (`code_Type_Praticien`) REFERENCES `type_praticien` (`code`),
+  ADD CONSTRAINT `FK_Praticien_id_Type_Praticien` FOREIGN KEY (`id_Type_Praticien`) REFERENCES `type_praticien` (`id`),
   ADD CONSTRAINT `FK_Praticien_id_Ville` FOREIGN KEY (`id_Ville`) REFERENCES `ville` (`id`);
 
 --
