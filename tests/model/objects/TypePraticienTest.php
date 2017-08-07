@@ -1,6 +1,4 @@
 <?php
-declare(strict_types=1);
-
 use PHPUnit\Framework\TestCase;
 use gsb_prospects\model\objects\TypePraticien;
 
@@ -13,7 +11,7 @@ final class TypePraticienTest extends TestCase
 
     protected function setUp()
     {
-        $this->object = new TypePraticien("code","libelle","lieu");
+        $this->object = new TypePraticien(0, "code","libelle","lieu");
     }
 
     public function testNew()
@@ -22,6 +20,15 @@ final class TypePraticienTest extends TestCase
         $this->assertInstanceOf(
             $expected,
             $this->object
+        );
+    }
+
+    public function testGetId()
+    {
+        $expected = 0;
+        $this->assertEquals(
+            $expected,
+            $this->object->getId()
         );
     }
 

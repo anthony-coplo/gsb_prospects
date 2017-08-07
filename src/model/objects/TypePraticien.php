@@ -1,23 +1,49 @@
 <?php
-declare(strict_types=1);
-
 namespace gsb_prospects\model\objects;
 
 final class TypePraticien {
     /**
+     * @var int    $id
      * @var string $code
      * @var string $libelle
      * @var string $lieu
      */
+    private $id;
     private $code;
     private $libelle;
     private $lieu;
-
-    public function __construct(string $code, string $libelle, string $lieu)
+/*
+    public function __construct()
     {
-        $this->code = $code;
-        $this->libelle = $libelle;
-        $this->lieu = $lieu;
+        if(func_num_args() == 0) {
+            $this->id      = 0;
+            $this->code    = "";
+            $this->libelle = "";
+            $this->lieu    = "";
+        } else {
+            $id = func_get_arg(0);
+            $code  = func_get_arg(1);
+            $libelle = func_get_arg(2);
+            $lieu = func_get_arg(3);
+
+            $this->id      = $id;
+            $this->code    = $code;
+            $this->libelle = $libelle;
+            $this->lieu    = $lieu;
+        }
+    }*/
+
+    public function __construct($id, $code, $libelle, $lieu)
+    {
+            $this->id      = intval($id);
+            $this->code    = $code;
+            $this->libelle = $libelle;
+            $this->lieu    = $lieu;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     public function getCode(): string
