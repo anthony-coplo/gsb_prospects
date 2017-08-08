@@ -40,6 +40,21 @@ final class TypePraticienDAOTest extends TestCase
         $result = $this->object->find(0);
     }
 
+    public function testFindAll()
+    {
+        $result = $this->object->findAll();
+
+        $expected = [
+            new TypePraticien(1, "MH", "Médecin Hospitalier", "Hopital ou Clinique"),
+            new TypePraticien(2, "MV", "Médecine de Ville", "Cabinet"),
+            new TypePraticien(3, "PH", "Pharmacien Hospitalier", "Hopital ou Clinique"),
+            new TypePraticien(4, "PO", "Pharmacien Officine", "Pharmacie"),
+            new TypePraticien(5, "PS", "Personnel de santé", "Centre Paramédical"),
+        ];
+
+        $this->assertEquals($expected, $result);
+    }
+
     public function findProvider()
     {
         return [
