@@ -2,10 +2,11 @@
 namespace gsb_prospects\model\dao;
 
 use \PDO;
+use \Exception;
 use gsb_prospects\kernel\NotImplementedException;
 use gsb_prospects\model\objects\TypePraticien;
 
-final class TypePraticienDAO extends AbstractDAO implements iDAO {
+final class TypePraticienDAO extends AbstractDAO implements IDAO {
     private $tablename = "type_praticien";
 
     public function delete($object)
@@ -30,8 +31,8 @@ final class TypePraticienDAO extends AbstractDAO implements iDAO {
         $this->closeConnexion();
 
         if(! $object){
-            print($sth->errorInfo()[2] . PHP_EOL);
-            throw new \Exception();
+            $msg print($sth->errorInfo()[2] . PHP_EOL);
+            throw new Exception();
         }
 
         return $object;
@@ -39,7 +40,24 @@ final class TypePraticienDAO extends AbstractDAO implements iDAO {
 
     public function findAll()
     {
-        throw new NotImplementedException();
+        $dbh = $this->getConnexion();
+
+        $query = "SELECT * FROM `{$this->tablename}`;";
+        
+        $sth = $dbh->prepare($query);
+        $sth->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "gsb_prospects\model\objects\TypePraticien", array("id", "code", "libelle", "lieu"));
+        $sth->execute();
+
+        $objects = $sth->fetchAll();
+
+        $this->closeConnexion();
+
+        if(! $object){
+            print($sth->errorInfo()[2] . PHP_EOL);
+            throw new \Exception();
+        }
+
+        return $object;
     }
 
     public function insert($object)

@@ -1,7 +1,7 @@
 <?php
 namespace gsb_prospects\model\dao;
 
-interface iDAO {
+interface IDAO {
     function delete($object);
     function find($id);
     function findAll();
