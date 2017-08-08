@@ -12,30 +12,10 @@ final class TypePraticien {
     private $code;
     private $libelle;
     private $lieu;
-/*
-    public function __construct()
-    {
-        if(func_num_args() == 0) {
-            $this->id      = 0;
-            $this->code    = "";
-            $this->libelle = "";
-            $this->lieu    = "";
-        } else {
-            $id = func_get_arg(0);
-            $code  = func_get_arg(1);
-            $libelle = func_get_arg(2);
-            $lieu = func_get_arg(3);
-
-            $this->id      = $id;
-            $this->code    = $code;
-            $this->libelle = $libelle;
-            $this->lieu    = $lieu;
-        }
-    }*/
 
     public function __construct($id, $code, $libelle, $lieu)
     {
-            $this->id      = intval($id);
+            $this->id      = $id;
             $this->code    = $code;
             $this->libelle = $libelle;
             $this->lieu    = $lieu;
