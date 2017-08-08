@@ -2,7 +2,6 @@
 namespace gsb_prospects\model\dao;
 
 use \PDO;
-use \Exception;
 use gsb_prospects\kernel\NotImplementedException;
 use gsb_prospects\model\objects\TypePraticien;
 
@@ -31,8 +30,12 @@ final class TypePraticienDAO extends AbstractDAO implements IDAO {
         $this->closeConnexion();
 
         if(! $object){
-            $msg print($sth->errorInfo()[2] . PHP_EOL);
-            throw new Exception();
+            $message = $sth->errorInfo()[2];    // Error Message
+            $code = $sth->errorInfo()[0];       // SQLSTATE
+            if($code == 0 && empty($message)) {
+                $message = "unknown id $id";
+            }
+            throw new DAOException($message, $code);
         }
 
         return $object;

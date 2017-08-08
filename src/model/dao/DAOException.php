@@ -1,4 +1,6 @@
 <?php
 namespace gsb_prospects\model\dao;
 
-final class DAOException extends Exception {}
+use gsb_prospects\kernel\AbstractException;
+
+final class DAOException extends AbstractException {}

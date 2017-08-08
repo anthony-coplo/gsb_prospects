@@ -1,5 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
+use gsb_prospects\model\dao\DAOException;
 use gsb_prospects\model\dao\TypePraticienDAO;
 use gsb_prospects\model\objects\TypePraticien;
 
@@ -28,6 +29,15 @@ final class TypePraticienDAOTest extends TestCase
         $this->assertEquals($code, $result->getCode());
         $this->assertEquals($libelle, $result->getLibelle());
         $this->assertEquals($lieu, $result->getLieu());
+    }
+    
+    public function testFindException()
+    {
+        $this->expectException(DAOException::class);
+        $this->expectExceptionMessage("unknown id 0");
+        $this->expectExceptionCode(0);
+
+        $result = $this->object->find(0);
     }
 
     public function findProvider()
