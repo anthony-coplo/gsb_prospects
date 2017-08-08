@@ -55,12 +55,15 @@ final class TypePraticienDAO extends AbstractDAO implements IDAO {
 
         $this->closeConnexion();
 
-        if(! $object){
-            print($sth->errorInfo()[2] . PHP_EOL);
-            throw new \Exception();
+        if(! $objects){
+            $message = $sth->errorInfo()[2];    // Error Message
+            $code = $sth->errorInfo()[0];       // SQLSTATE
+            if ($code != 0){
+                throw new DAOException($message, $code);
+            }
         }
 
-        return $object;
+        return $objects;
     }
 
     public function insert($object)
