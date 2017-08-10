@@ -15,7 +15,10 @@ abstract class AbstractDAO {
     const USER = "gsb";
     const PASSWORD = "gsb!2017";
 
-    protected $table;
+    protected $table = null;
+    protected $class = null;
+    protected $fields = array();
+
     private $connexion;
 
     protected function getConnexion() {
@@ -31,6 +34,59 @@ abstract class AbstractDAO {
 
     protected function closeConnexion() {
         $connexion = null;
+    }
+
+    public function find($id)
+    {
+        $dbh = $this->getConnexion();
+
+        $query = "SELECT * FROM `{$this->table}`
+                  WHERE `id` = :id;";
+        
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(":id", $id);
+        $sth->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->class, $this->fields);
+        $sth->execute();
+
+        $object = $sth->fetch();
+
+        $this->closeConnexion();
+
+        if(! $object){
+            $message = $sth->errorInfo()[2];    // Error Message
+            $code = $sth->errorInfo()[0];       // SQLSTATE
+            if($code == 0 && empty($message)) {
+                $message = "unknown id $id";
+            }
+            throw new DAOException($message, $code);
+        }
+
+        return $object;
+    }
+
+    public function findAll()
+    {
+        $dbh = $this->getConnexion();
+
+        $query = "SELECT * FROM `{$this->table}`;";
+        
+        $sth = $dbh->prepare($query);
+        $sth->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->class, $this->fields);
+        $sth->execute();
+
+        $objects = $sth->fetchAll();
+
+        $this->closeConnexion();
+
+        if(! $objects){
+            $message = $sth->errorInfo()[2];    // Error Message
+            $code = $sth->errorInfo()[0];       // SQLSTATE
+            if ($code != 0){
+                throw new DAOException($message, $code);
+            }
+        }
+
+        return $objects;
     }
 }
 ?>
