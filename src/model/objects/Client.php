@@ -10,11 +10,12 @@ final class Client extends Praticien {
     /**
      * @var Prestation $lesPrestations
      */
+    private $id_Praticien;
     private $lesPrestations;
 
-    public function __construct($id, $nom, $prenom, $adresse)
+    public function __construct($id, $nom, $prenom, $adresse, $id_Ville = 0, $id_Type_Praticien = 0)
     {
-        parent::__construct($id, $nom, $prenom, $adresse);
+        parent::__construct($id, $nom, $prenom, $adresse, $id_Ville, $id_Type_Praticien);
         $this->lesPrestations = array();
     }
 

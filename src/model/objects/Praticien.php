@@ -24,14 +24,14 @@ class Praticien {
 
     public function __construct($id, $nom, $prenom, $adresse, $id_Ville = 0, $id_Type_Praticien = 0)
     {
-            $this->id                = $id;
-            $this->nom               = $nom;
-            $this->prenom            = $prenom;
-            $this->adresse           = $adresse;
-            $this->id_Ville          = $id_Ville;
-            $this->laVille           = null;
-            $this->id_Type_Praticien = $id_Type_Praticien;
-            $this->leTypePraticien   = null;
+        $this->id                = $id;
+        $this->nom               = $nom;
+        $this->prenom            = $prenom;
+        $this->adresse           = $adresse;
+        $this->id_Ville          = $id_Ville;
+        $this->laVille           = null;
+        $this->id_Type_Praticien = $id_Type_Praticien;
+        $this->leTypePraticien   = null;
     }
 
     public function getId(): int

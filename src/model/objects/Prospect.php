@@ -8,12 +8,24 @@ final class Prospect extends Praticien {
     /**
      * @var Etat $lEtat
      */
+    private $id_Etat;
     private $lEtat;
 
-    public function __construct($id, $nom, $prenom, $adresse)
+    public function __construct($id, $nom, $prenom, $adresse, $id_Ville = 0, $id_Type_Praticien = 0, $id_Etat = 0)
     {
-        parent::__construct($id, $nom, $prenom, $adresse);
-        $lEtat = null;
+        parent::__construct($id, $nom, $prenom, $adresse, $id_Ville, $id_Type_Praticien);
+        $this->id_Etat = $id_Etat;
+        $this->lEtat   = null;
+    }
+
+    public function getIdEtat(): array
+    {
+        return $this->id_Etat;
+    }
+
+    public function setIdEtat(int $value)
+    {
+        $this->id_Etat = $value;
     }
 
     public function getEtat(): array
