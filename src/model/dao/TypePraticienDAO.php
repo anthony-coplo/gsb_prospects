@@ -6,7 +6,7 @@ use gsb_prospects\kernel\NotImplementedException;
 use gsb_prospects\model\objects\TypePraticien;
 
 final class TypePraticienDAO extends AbstractDAO implements IDAO {
-    private $tablename = "type_praticien";
+    protected $table = "type_praticien";
 
     public function delete($object)
     {
@@ -17,7 +17,7 @@ final class TypePraticienDAO extends AbstractDAO implements IDAO {
     {
         $dbh = $this->getConnexion();
 
-        $query = "SELECT * FROM `{$this->tablename}`
+        $query = "SELECT * FROM `{$this->table}`
                   WHERE `id` = :id;";
         
         $sth = $dbh->prepare($query);
@@ -45,7 +45,7 @@ final class TypePraticienDAO extends AbstractDAO implements IDAO {
     {
         $dbh = $this->getConnexion();
 
-        $query = "SELECT * FROM `{$this->tablename}`;";
+        $query = "SELECT * FROM `{$this->table}`;";
         
         $sth = $dbh->prepare($query);
         $sth->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "gsb_prospects\model\objects\TypePraticien", array("id", "code", "libelle", "lieu"));

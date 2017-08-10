@@ -15,11 +15,8 @@ abstract class AbstractDAO {
     const USER = "gsb";
     const PASSWORD = "gsb!2017";
 
-
+    protected $table;
     private $connexion;
-
-    public function __construct() {
-    }
 
     protected function getConnexion() {
         try {
