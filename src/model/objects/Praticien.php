@@ -4,7 +4,7 @@ namespace gsb_prospects\model\objects;
 use gsb_prospects\model\objects\Ville;
 use gsb_prospects\model\objects\TypePraticien;
 
-abstract class Praticien {
+class Praticien {
     /**
      * @var int    $id
      * @var string $nom
@@ -17,17 +17,21 @@ abstract class Praticien {
     private $nom;
     private $prenom;
     private $adresse;
+    private $id_Ville;
     private $laVille;
+    private $id_Type_Praticien;
     private $leTypePraticien;
 
-    public function __construct($id, $nom, $prenom, $adresse)
+    public function __construct($id, $nom, $prenom, $adresse, $id_Ville = 0, $id_Type_Praticien = 0)
     {
-            $this->id              = $id;
-            $this->nom             = $nom;
-            $this->prenom          = $prenom;
-            $this->adresse         = $adresse;
-            $this->laVille         = null;
-            $this->leTypePraticien = null;
+            $this->id                = $id;
+            $this->nom               = $nom;
+            $this->prenom            = $prenom;
+            $this->adresse           = $adresse;
+            $this->id_Ville          = $id_Ville;
+            $this->laVille           = null;
+            $this->id_Type_Praticien = $id_Type_Praticien;
+            $this->leTypePraticien   = null;
     }
 
     public function getId(): int
@@ -74,6 +78,19 @@ abstract class Praticien {
         $this->adresse = $value;
     }
 
+    public function getIdVille()
+    {
+        return $this->id_Ville;
+    }
+
+    /**
+     * @param int $value
+     */
+    public function setIdVille(int $value)
+    {
+        $this->id_Ville = $value;
+    }
+
     public function getVille(): Ville
     {
         return $this->laVille;
@@ -98,5 +115,18 @@ abstract class Praticien {
     public function setTypePraticien(TypePraticien $instance)
     {
         $this->leTypePraticien = $instance;
+    }
+
+    public function getIdTypePraticien()
+    {
+        return $this->id_Type_Praticien;
+    }
+
+    /**
+     * @param int $value
+     */
+    public function setIdTypePraticien(int $value)
+    {
+        $this->id_Type_Praticien = $value;
     }
 }
