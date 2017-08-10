@@ -4,7 +4,7 @@ namespace gsb_prospects\model\objects;
 use gsb_prospects\model\objects\Ville;
 use gsb_prospects\model\objects\TypePraticien;
 
-final class Praticien {
+abstract class Praticien {
     /**
      * @var int    $id
      * @var string $nom
