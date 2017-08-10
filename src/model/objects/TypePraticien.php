@@ -15,10 +15,10 @@ final class TypePraticien {
 
     public function __construct($id, $code, $libelle, $lieu)
     {
-            $this->id      = $id;
-            $this->code    = $code;
-            $this->libelle = $libelle;
-            $this->lieu    = $lieu;
+        $this->id      = $id;
+        $this->code    = $code;
+        $this->libelle = $libelle;
+        $this->lieu    = $lieu;
     }
 
     public function getId(): int
