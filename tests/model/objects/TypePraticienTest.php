@@ -41,6 +41,9 @@ final class TypePraticienTest extends TestCase
         );
     }
 
+    /**
+     * @depends testGetCode
+     */
     public function testSetCode()
     {
         $expected = "modified";
@@ -60,6 +63,9 @@ final class TypePraticienTest extends TestCase
         );
     }
 
+    /**
+     * @depends testGetLibelle
+     */
     public function testSetLibelle()
     {
         $expected = "modified";
@@ -79,6 +85,9 @@ final class TypePraticienTest extends TestCase
         );
     }
 
+    /**
+     * @depends testGetLieu
+     */
     public function testSetLieu()
     {
         $expected = "modified";
