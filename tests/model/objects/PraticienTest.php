@@ -107,35 +107,9 @@ final class PraticienTest extends TestCase
         );
     }
 
-    /**
-     * @depends testGetIdVille
-     */
-    public function testSetIdVille()
-    {
-        $expected = 1;
-        $this->object->setIdVille($expected);
-        $this->assertEquals(
-            $expected,
-            $this->object->getIdVille()
-        );
-    }
-
     public function testGetIdTypePraticien()
     {
         $expected = 0;
-        $this->assertEquals(
-            $expected,
-            $this->object->getIdTypePraticien()
-        );
-    }
-
-    /**
-     * @depends testGetIdTypePraticien
-     */
-    public function testSetIdTypePraticien()
-    {
-        $expected = 1;
-        $this->object->setIdTypePraticien($expected);
         $this->assertEquals(
             $expected,
             $this->object->getIdTypePraticien()

@@ -18,17 +18,12 @@ final class Prospect extends Praticien {
         $this->lEtat   = null;
     }
 
-    public function getIdEtat(): array
+    public function getIdEtat()
     {
         return $this->id_Etat;
     }
 
-    public function setIdEtat(int $value)
-    {
-        $this->id_Etat = $value;
-    }
-
-    public function getEtat(): array
+    public function getEtat()
     {
         return $this->lEtat;
     }

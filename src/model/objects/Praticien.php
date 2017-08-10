@@ -83,14 +83,6 @@ class Praticien {
         return $this->id_Ville;
     }
 
-    /**
-     * @param int $value
-     */
-    public function setIdVille(int $value)
-    {
-        $this->id_Ville = $value;
-    }
-
     public function getVille(): Ville
     {
         return $this->laVille;
@@ -104,6 +96,11 @@ class Praticien {
         $this->laVille = $instance;
     }
 
+    public function getIdTypePraticien()
+    {
+        return $this->id_Type_Praticien;
+    }
+
     public function getTypePraticien(): TypePraticien
     {
         return $this->leTypePraticien;
@@ -115,18 +112,5 @@ class Praticien {
     public function setTypePraticien(TypePraticien $instance)
     {
         $this->leTypePraticien = $instance;
-    }
-
-    public function getIdTypePraticien()
-    {
-        return $this->id_Type_Praticien;
-    }
-
-    /**
-     * @param int $value
-     */
-    public function setIdTypePraticien(int $value)
-    {
-        $this->id_Type_Praticien = $value;
     }
 }
