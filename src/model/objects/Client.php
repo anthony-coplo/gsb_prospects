@@ -1,6 +1,8 @@
 <?php
 namespace gsb_prospects\model\objects;
 
+use \InvalidArgumentException;
+use \OutOfBoundsException;
 use gsb_prospects\model\objects\Praticien;
 use gsb_prospects\model\objects\Prestation;
 
@@ -13,7 +15,7 @@ final class Client extends Praticien {
     public function __construct($id, $nom, $prenom, $adresse)
     {
         parent::__construct($id, $nom, $prenom, $adresse);
-        $lesPrestations = array();
+        $this->lesPrestations = array();
     }
 
     public function getPrestations(): array
@@ -31,18 +33,33 @@ final class Client extends Praticien {
         $this->lesPrestations[] = $instance;
     }
 
-    public function removePrestation(mixed $prestation)
+    public function removePrestation($prestation)
     {
         if(is_int($prestation)) {
-            // index
-            if(isset($this->lesPrestations[$prestation])) {
+            // $prestation is an index
+            $index = $prestation;
+            // checking index
+            $isset = isset($this->lesPrestations[$prestation]);
+            if($isset === false) {
                 throw new OutOfBoundsException("index out of bounds");
+            } else {
+                // removing element and resorting keys
+                array_splice($this->lesPrestations, $index, 1);
             }
-            unset($this->lesPrestations[$prestation]);
         } elseif ($prestation instanceof Prestation) {
-            // object
+            // $prestation is an instance
+            $instance = $prestation;
+            // searching instance
+            $index = array_search($instance, $this->lesPrestations, true);
+            if ($index === false) {
+                throw new InvalidArgumentException("instance not found");    
+            } else {
+                // removing element and resorting keys
+                array_splice($this->lesPrestations, $index, 1);
+            }
         } else {
-            throw new InvalidArgumentException("parameter must be int or an instance of Prestation");
+            // $prestation is neither an index nor an instance
+            throw new InvalidArgumentException("parameter must be an index or an instance of Prestation");
         }
     }
 }
