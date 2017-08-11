@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 10 Août 2017 à 13:49
+-- Généré le :  Ven 11 Août 2017 à 09:44
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -30,6 +30,47 @@ CREATE TABLE `client` (
   `id_Praticien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `client`
+--
+
+INSERT INTO `client` (`id_Praticien`) VALUES
+(3),
+(4),
+(7),
+(9),
+(10),
+(11),
+(12),
+(13),
+(17),
+(20),
+(21),
+(24),
+(25),
+(29),
+(32),
+(33),
+(34),
+(35),
+(37),
+(41),
+(42),
+(43),
+(44),
+(45),
+(46),
+(50),
+(51);
+
+--
+-- Déclencheurs `client`
+--
+DELIMITER $$
+CREATE TRIGGER `client_ai` AFTER INSERT ON `client` FOR EACH ROW DELETE FROM prospect WHERE id_Praticien = NEW.id_Praticien
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -41,6 +82,17 @@ CREATE TABLE `etat` (
   `nom` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `etat`
+--
+
+INSERT INTO `etat` (`id`, `nom`) VALUES
+(1, 'nouveau'),
+(2, 'à rappeler'),
+(3, 'rendez-vous en attente'),
+(4, 'rendez-vous à confirmer'),
+(5, 'rendez-vous confirmé');
+
 -- --------------------------------------------------------
 
 --
@@ -48,9 +100,55 @@ CREATE TABLE `etat` (
 --
 
 CREATE TABLE `interesser` (
-  `id_Prestation` int(11) NOT NULL,
-  `id_Client` int(11) NOT NULL
+  `id_Client` int(11) NOT NULL,
+  `id_Prestation` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `interesser`
+--
+
+INSERT INTO `interesser` (`id_Client`, `id_Prestation`) VALUES
+(3, 3),
+(4, 1),
+(4, 2),
+(7, 2),
+(7, 3),
+(9, 1),
+(9, 2),
+(9, 3),
+(10, 1),
+(11, 1),
+(12, 2),
+(12, 3),
+(13, 1),
+(17, 1),
+(20, 2),
+(21, 2),
+(24, 3),
+(25, 1),
+(25, 2),
+(25, 3),
+(29, 1),
+(29, 2),
+(29, 3),
+(32, 1),
+(32, 2),
+(33, 1),
+(34, 2),
+(35, 3),
+(37, 1),
+(37, 2),
+(41, 1),
+(42, 1),
+(43, 1),
+(43, 2),
+(44, 2),
+(45, 3),
+(46, 1),
+(50, 1),
+(51, 1),
+(51, 2);
 
 -- --------------------------------------------------------
 
@@ -170,6 +268,15 @@ CREATE TABLE `prestation` (
   `nom` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `prestation`
+--
+
+INSERT INTO `prestation` (`id`, `nom`) VALUES
+(1, 'visite'),
+(2, 'conférence'),
+(3, 'formation');
+
 -- --------------------------------------------------------
 
 --
@@ -180,6 +287,37 @@ CREATE TABLE `prospect` (
   `id_Praticien` int(11) NOT NULL,
   `id_Etat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `prospect`
+--
+
+INSERT INTO `prospect` (`id_Praticien`, `id_Etat`) VALUES
+(63, 1),
+(64, 1),
+(65, 1),
+(66, 1),
+(67, 1),
+(68, 1),
+(69, 1),
+(70, 1),
+(71, 1),
+(72, 1),
+(73, 1),
+(74, 1),
+(75, 1),
+(76, 1),
+(53, 2),
+(55, 2),
+(56, 2),
+(57, 2),
+(59, 2),
+(60, 2),
+(61, 2),
+(62, 2),
+(52, 3),
+(54, 3),
+(58, 3);
 
 -- --------------------------------------------------------
 
@@ -364,7 +502,7 @@ ALTER TABLE `ville`
 -- AUTO_INCREMENT pour la table `etat`
 --
 ALTER TABLE `etat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `praticien`
 --
@@ -374,7 +512,7 @@ ALTER TABLE `praticien`
 -- AUTO_INCREMENT pour la table `prestation`
 --
 ALTER TABLE `prestation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `type_praticien`
 --
@@ -384,7 +522,7 @@ ALTER TABLE `type_praticien`
 -- AUTO_INCREMENT pour la table `ville`
 --
 ALTER TABLE `ville`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- Contraintes pour les tables exportées
 --
