@@ -21,7 +21,7 @@ final class TypePraticien {
         $this->lieu    = $lieu;
     }
 
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }

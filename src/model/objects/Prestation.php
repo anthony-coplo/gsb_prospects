@@ -15,7 +15,7 @@ final class Prestation {
         $this->nom = $nom;
     }
 
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
