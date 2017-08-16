@@ -13,14 +13,14 @@ class Praticien {
      * @var Ville $laVille
      * @var TypePraticien $leTypePraticien
      */
-    private $id;
-    private $nom;
-    private $prenom;
-    private $adresse;
-    private $id_Ville;
-    private $laVille;
-    private $id_Type_Praticien;
-    private $leTypePraticien;
+    protected $id;
+    protected $nom;
+    protected $prenom;
+    protected $adresse;
+    protected $id_Ville;
+    protected $laVille;
+    protected $id_Type_Praticien;
+    protected $leTypePraticien;
 
     public function __construct($id, $nom, $prenom, $adresse, $id_Ville = 0, $id_Type_Praticien = 0)
     {
