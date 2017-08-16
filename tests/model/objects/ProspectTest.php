@@ -12,7 +12,7 @@ final class ProspectTest extends TestCase
 
     protected function setUp()
     {
-        $this->object = new Prospect(0, "nom","prenom","adresse");
+        $this->object = new Prospect(null, null, 0, "nom","prenom","adresse");
     }
 
     public function testNew()
