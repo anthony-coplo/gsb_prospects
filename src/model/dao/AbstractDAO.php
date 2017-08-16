@@ -91,7 +91,11 @@ abstract class AbstractDAO {
     {
         $dbh = $this->getConnexion();
 
-        $query = "SELECT * FROM `{$this->table}`;";
+        $query = "SELECT * FROM `{$this->table}`;" . PHP_EOL;
+        if(! empty($this->joinedTables)) {
+            $query .= $this->join();
+        }
+        $query .= ";";
         
         $sth = $dbh->prepare($query);
         $sth->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->class, $this->fields);
