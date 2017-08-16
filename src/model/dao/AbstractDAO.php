@@ -15,9 +15,10 @@ abstract class AbstractDAO {
     const USER = "gsb";
     const PASSWORD = "gsb!2017";
 
-    protected $table = null;
-    protected $class = null;
-    protected $fields = array();
+    protected $table  = null;
+    protected $class  = null;
+    protected $joinedTables   = [];
+    protected $fields = [];
 
     private $connexion;
 
@@ -36,12 +37,34 @@ abstract class AbstractDAO {
         $connexion = null;
     }
 
+    protected function join(): string
+    {
+        $str = "";
+        foreach($this->joinedTables as $join) {
+            $str .= "INNER JOIN `{$join['table']}` ON ";
+            $count_FK = count($join["FK"]);
+            $count_PK = count($join["PK"]);
+            $count = ($count_FK <= $count_PK) ? $count_FK: $count_PK;
+            for($index = 0; $index < $count; $index++) {
+                if($index != 0) {
+                    $str .= " AND ";
+                }
+                $str .= "`{$this->table}`.`{$join['FK'][$index]}` = `{$join['table']}`.`{$join['PK'][$index]}`";
+            }
+            $str .= PHP_EOL;
+        }
+        return $str;
+    }
+
     public function find($id)
     {
         $dbh = $this->getConnexion();
 
-        $query = "SELECT * FROM `{$this->table}`
-                  WHERE `id` = :id;";
+        $query  = "SELECT * FROM `{$this->table}`" . PHP_EOL;
+        if(! empty($this->joinedTables)) {
+            $query .= $this->join();
+        }
+        $query .= "WHERE `id` = :id;";
         
         $sth = $dbh->prepare($query);
         $sth->bindParam(":id", $id);
