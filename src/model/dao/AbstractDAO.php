@@ -37,10 +37,13 @@ abstract class AbstractDAO {
         $connexion = null;
     }
 
-    protected function join(): string
+    protected function join($joinedTables = []): string
     {
+        if (empty($joinedTables)) {
+            $joinedTables = $this->joinedTables;
+        }
         $str = "";
-        foreach($this->joinedTables as $join) {
+        foreach($joinedTables as $join) {
             $str .= "INNER JOIN `{$join['table']}` ON ";
             $count_FK = count($join["FK"]);
             $count_PK = count($join["PK"]);
