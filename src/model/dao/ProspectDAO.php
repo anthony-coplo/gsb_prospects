@@ -9,7 +9,7 @@ use gsb_prospects\model\objects\Prospect;
 final class ProspectDAO extends AbstractDAO implements IDAO {
     protected $table = "prospect";
     protected $joinedTables = [
-        ["FK" => ["id_praticien"], "table" => "praticien", "PK" => ["id"]],
+        [ "Type"=>"Inner", "Table"=>"praticien", "Foreign Table"=>"prospect", "Foreign Key"=>["id_praticien"], "Primary Table"=>"praticien", "Primary Key"=>["id"] ],
     ];
     protected $class = "gsb_prospects\model\objects\Prospect";
     protected $fields = array("id_Praticien", "id_Etat", "id", "nom", "prenom", "adresse", "id_Ville", "id_Type_Praticien");
