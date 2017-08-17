@@ -17,7 +17,7 @@ abstract class AbstractDAO {
 
     protected $table  = null;
     protected $class  = null;
-    protected $joinedTables   = [];
+    protected $joinedTables = [];
     protected $fields = [];
 
     private $connexion;
@@ -39,20 +39,44 @@ abstract class AbstractDAO {
 
     protected function join($joinedTables = []): string
     {
+        // Structure : [ "Type"=>"", "Table"=>"", "Foreign Table"=>"", "Foreign Key"=>[], "Primary Table"=>"", "Primary Key"=>[] ]
+
         if (empty($joinedTables)) {
             $joinedTables = $this->joinedTables;
         }
+
         $str = "";
         foreach($joinedTables as $join) {
-            $str .= "INNER JOIN `{$join['table']}` ON ";
-            $count_FK = count($join["FK"]);
-            $count_PK = count($join["PK"]);
+            // default join type
+            if(!isset($join['Type'])) {
+                $join['Type'] = "Join";
+            }
+            // check join type
+            switch($join['Type']) {
+                case "Join":
+                    $type = "JOIN";
+                    break;
+                case "Inner":
+                    $type = "INNER JOIN";
+                    break;
+                case "Outer":
+                    $type = "OUTER JOIN";
+                    break;
+                case "Natural":
+                    $type = "NATURAL JOIN";
+                    break;
+            }
+            // init join statement
+            $str .= "{$type} `{$join['Table']}` ON ";
+            // check join keys
+            $count_FK = count($join["Foreign Key"]);
+            $count_PK = count($join["Primary Key"]);
             $count = ($count_FK <= $count_PK) ? $count_FK: $count_PK;
             for($index = 0; $index < $count; $index++) {
                 if($index != 0) {
                     $str .= " AND ";
                 }
-                $str .= "`{$this->table}`.`{$join['FK'][$index]}` = `{$join['table']}`.`{$join['PK'][$index]}`";
+                $str .= "`{$join['Foreign Table']}`.`{$join['Foreign Key'][$index]}` = `{$join['Primary Table']}`.`{$join['Primary Key'][$index]}`";
             }
             $str .= PHP_EOL;
         }
