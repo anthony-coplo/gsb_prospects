@@ -25,14 +25,15 @@ final class ProspectDAOTest extends TestCase
 
         $this->assertInstanceOf(Prospect::class, $result);
 
+        $this->assertEquals($id_Praticien, $result->getIdPraticien());
+        $this->assertEquals($id_Etat, $result->getIdEtat());
+        
         $this->assertEquals($id, $result->getId());
         $this->assertEquals($nom, $result->getNom());
         $this->assertEquals($prenom, $result->getPrenom());
         $this->assertEquals($adresse, $result->getAdresse());
         $this->assertEquals($id_Ville, $result->getIdVille());
         $this->assertEquals($id_Type_Praticien, $result->getIdTypePraticien());
-        $this->assertEquals($id_Praticien, $result->getIdPraticien());
-        $this->assertEquals($id_Etat, $result->getIdEtat());
     }
     
     public function testFindException()
