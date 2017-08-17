@@ -7,6 +7,7 @@ use gsb_prospects\model\dao\TypePraticienDAO;
 use gsb_prospects\model\objects\TypePraticien;
 use gsb_prospects\model\dao\VilleDAO;
 use gsb_prospects\model\objects\Ville;
+use gsb_prospects\view\View;
 
 final class PraticienController {
     public function defaultAction()
@@ -29,6 +30,9 @@ final class PraticienController {
             $object->setTypePraticien($typePraticien);
         }
 
-        var_dump($objects);
+        $view = new View("Praticien_List");
+        $view->bind("title", "Liste des Praticiens");
+        $view->bind("objects", $objects);
+        $view->display();
     }
 }
