@@ -19,6 +19,11 @@ final class Client extends Praticien {
         $this->lesPrestations = array();
     }
 
+    public function getIdPraticien()
+    {
+        return $this->id_Praticien;
+    }
+
     public function getPrestations(): array
     {
         return $this->lesPrestations;
