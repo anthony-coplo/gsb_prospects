@@ -55,11 +55,11 @@ final class PrestationDAOTest extends TestCase
     }
 
     /**
-     * @dataProvider findFromClientProvider
+     * @dataProvider findAllFromClientProvider
      */
-    public function testFindFromClient($id_Client, $array)
+    public function testFindAllFromClient($id_Client, $array)
     {
-        $results = $this->object->findFromClient($id_Client);
+        $results = $this->object->findAllFromClient($id_Client);
 
         $expected = [];
         foreach($array as $row) {
@@ -80,7 +80,7 @@ final class PrestationDAOTest extends TestCase
         ];
     }
 
-    public function findFromClientProvider()
+    public function findAllFromClientProvider()
     {
         return [
             [ '3',  [                                           [ '3', 'formation' ] ] ],

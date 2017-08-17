@@ -11,7 +11,7 @@ final class PrestationDAO extends AbstractDAO implements IDAO {
     protected $class = "gsb_prospects\model\objects\Prestation";
     protected $fields = array("id", "nom");
 
-    public function findFromClient($id)
+    public function findAllFromClient($id)
     {
         $dbh = $this->getConnexion();
         
