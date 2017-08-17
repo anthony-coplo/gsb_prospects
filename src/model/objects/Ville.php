@@ -5,17 +5,17 @@ final class Ville {
     /**
      * @var int    $id
      * @var string $nom
-     * @var string $codePostal
+     * @var string $code_postal
      */
     private $id;
     private $nom;
-    private $codePostal;
+    private $code_postal;
 
-    public function __construct($id, $nom, $codePostal)
+    public function __construct($id, $nom, $code_postal)
     {
         $this->id         = $id;
         $this->nom        = $nom;
-        $this->codePostal = $codePostal;
+        $this->code_postal = $code_postal;
     }
 
     public function getId()
@@ -38,7 +38,7 @@ final class Ville {
 
     public function getCodePostal(): string
     {
-        return $this->codePostal;
+        return $this->code_postal;
     }
 
     /**
@@ -46,6 +46,6 @@ final class Ville {
      */
     public function setCodePostal(string $value)
     {
-        $this->codePostal = $value;
+        $this->code_postal = $value;
     }
 }
