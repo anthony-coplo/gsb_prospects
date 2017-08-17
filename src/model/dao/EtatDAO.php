@@ -16,7 +16,7 @@ final class EtatDAO extends AbstractDAO implements IDAO {
         
         $query  = "SELECT `{$this->table}`.* FROM `{$this->table}`" . PHP_EOL;
         $query .= $this->join([
-            [ "Type"=>"Inner", "Table"=>"prospect", "Foreign Table"=>"prospect", "Foreign Key"=>["id_Etat"], "Primary Table"=>"Etat", "Primary Key"=>["id"] ],
+            [ "Type"=>"Inner", "Table"=>"prospect", "Foreign Table"=>"prospect", "Foreign Key"=>["id_Etat"], "Primary Table"=>"etat", "Primary Key"=>["id"] ],
         ]);
         $query .= "WHERE `id_Praticien` = :id;";
             
