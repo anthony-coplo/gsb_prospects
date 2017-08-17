@@ -55,15 +55,39 @@ final class TypePraticienDAOTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function findProvider()
+    /**
+     * @dataProvider findFromPraticienProvider
+     */
+     public function testFindFromPraticien($id, $row)
+     {
+         $results = $this->object->findFromPraticien($id);
+ 
+         $reflectedClass = new ReflectionClass("gsb_prospects\model\objects\TypePraticien");
+         $object = $reflectedClass->newInstanceArgs($row);
+         $expected = $object;
+ 
+         $this->assertEquals($expected, $results);
+     }
+
+     public function findProvider()
     {
         return [
-            [1, "MH", "Médecin Hospitalier", "Hopital ou Clinique"],
-            [2, "MV", "Médecine de Ville", "Cabinet"],
-            [3, "PH", "Pharmacien Hospitalier", "Hopital ou Clinique"],
-            [4, "PO", "Pharmacien Officine", "Pharmacie"],
-            [5, "PS", "Personnel de santé", "Centre Paramédical"],
+            [ '1', "MH", "Médecin Hospitalier", "Hopital ou Clinique" ],
+            [ '2', "MV", "Médecine de Ville", "Cabinet" ],
+            [ '3', "PH", "Pharmacien Hospitalier", "Hopital ou Clinique" ],
+            [ '4', "PO", "Pharmacien Officine", "Pharmacie" ],
+            [ '5', "PS", "Personnel de santé", "Centre Paramédical" ],
         ];
     }
 
+    public function findFromPraticienProvider()
+    {
+        return [
+            [ '1', [ '1', "MH", "Médecin Hospitalier", "Hopital ou Clinique" ] ],
+            [ '2', [ '2', "MV", "Médecine de Ville", "Cabinet" ] ],
+            [ '3', [ '5', "PS", "Personnel de santé", "Centre Paramédical" ] ],
+            [ '4', [ '3', "PH", "Pharmacien Hospitalier", "Hopital ou Clinique" ] ],
+            [ '5', [ '4', "PO", "Pharmacien Officine", "Pharmacie" ] ],
+        ];
+    }
 }
