@@ -1,10 +1,25 @@
 <?php
+/**
+ * PHP version 7.0
+ * gsb_prospects/src/model/dao/AbstractDAO.php
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
+
 namespace gsb_prospects\model\dao;
 
 use \PDOException;
 use \PDO;
 
-abstract class AbstractDAO {
+/**
+ * Class AbstractDAO
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
+abstract class AbstractDAO
+{
     const DRIVER = "mysql";
     const HOST = "host=localhost;";
     const DBNAME = "dbname=gsb_prospects;";
@@ -46,25 +61,25 @@ abstract class AbstractDAO {
         }
 
         $str = "";
-        foreach($joinedTables as $join) {
+        foreach ($joinedTables as $join) {
             // default join type
-            if(!isset($join['Type'])) {
+            if (!isset($join['Type'])) {
                 $join['Type'] = "Join";
             }
             // check join type
             switch($join['Type']) {
-                case "Join":
-                    $type = "JOIN";
-                    break;
-                case "Inner":
-                    $type = "INNER JOIN";
-                    break;
-                case "Outer":
-                    $type = "OUTER JOIN";
-                    break;
-                case "Natural":
-                    $type = "NATURAL JOIN";
-                    break;
+            case "Join":
+                $type = "JOIN";
+                break;
+            case "Inner":
+                $type = "INNER JOIN";
+                break;
+            case "Outer":
+                $type = "OUTER JOIN";
+                break;
+            case "Natural":
+                $type = "NATURAL JOIN";
+                break;
             }
             // init join statement
             $str .= "{$type} `{$join['Table']}` ON ";
@@ -72,8 +87,8 @@ abstract class AbstractDAO {
             $count_FK = count($join["Foreign Key"]);
             $count_PK = count($join["Primary Key"]);
             $count = ($count_FK <= $count_PK) ? $count_FK: $count_PK;
-            for($index = 0; $index < $count; $index++) {
-                if($index != 0) {
+            for ($index = 0; $index < $count; $index++) {
+                if ($index != 0) {
                     $str .= " AND ";
                 }
                 $str .= "`{$join['Foreign Table']}`.`{$join['Foreign Key'][$index]}` = `{$join['Primary Table']}`.`{$join['Primary Key'][$index]}`";
@@ -88,7 +103,7 @@ abstract class AbstractDAO {
         $dbh = $this->getConnexion();
 
         $query  = "SELECT * FROM `{$this->table}`" . PHP_EOL;
-        if(! empty($this->joinedTables)) {
+        if (! empty($this->joinedTables)) {
             $query .= $this->join();
         }
         $query .= "WHERE `id` = :id;";
@@ -102,10 +117,10 @@ abstract class AbstractDAO {
 
         $this->closeConnexion();
 
-        if(! $object){
+        if (! $object) {
             $message = $sth->errorInfo()[2];    // Error Message
             $code = $sth->errorInfo()[0];       // SQLSTATE
-            if($code == 0 && empty($message)) {
+            if ($code == 0 && empty($message)) {
                 $message = "unknown id $id";
             }
             throw new DAOException($message, $code);
@@ -119,7 +134,7 @@ abstract class AbstractDAO {
         $dbh = $this->getConnexion();
 
         $query = "SELECT * FROM `{$this->table}`;" . PHP_EOL;
-        if(! empty($this->joinedTables)) {
+        if (! empty($this->joinedTables)) {
             $query .= $this->join();
         }
         $query .= ";";
@@ -132,10 +147,10 @@ abstract class AbstractDAO {
 
         $this->closeConnexion();
 
-        if(! $objects){
+        if (! $objects) {
             $message = $sth->errorInfo()[2];    // Error Message
             $code = $sth->errorInfo()[0];       // SQLSTATE
-            if ($code != 0){
+            if ($code != 0) {
                 throw new DAOException($message, $code);
             }
         }

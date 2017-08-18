@@ -1,8 +1,25 @@
 <?php
+/**
+ * File :        TypePraticien.php
+ * Location :    gsb_prospects/src/model/objects/TypePraticien.php
+ * PHP Version : 7.0
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
 namespace gsb_prospects\model\objects;
 
-final class TypePraticien {
+/**
+ * Class TypePraticien
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
+final class TypePraticien
+{
     /**
+     * Properties
+     *
      * @var int    $id
      * @var string $code
      * @var string $libelle
@@ -13,6 +30,16 @@ final class TypePraticien {
     private $libelle;
     private $lieu;
 
+    /* Methods */
+
+    /**
+     * __construct
+     *
+     * @param int    $id      id
+     * @param string $code    code
+     * @param string $libelle libelle
+     * @param string $lieu    lieu
+     */
     public function __construct($id, $code, $libelle, $lieu)
     {
         $this->id      = $id;
@@ -21,48 +48,79 @@ final class TypePraticien {
         $this->lieu    = $lieu;
     }
 
+    /**
+     * Function getId
+     *
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Function getCode
+     *
+     * @return string
+     */
     public function getCode(): string
     {
         return $this->code;
     }
 
     /**
-     * @param string $value
+     * Procedure setCode
+     *
+     * @param string $value value
+     *
+     * @return void
      */
     public function setCode(string $value)
     {
         $this->code = $value;
     }
 
+    /**
+     * Function getLibelle
+     *
+     * @return string
+     */
     public function getLibelle(): string
     {
         return $this->libelle;
     }
 
     /**
-     * @param string $value
+     * Procedure setLibelle
+     *
+     * @param string $value value
+     *
+     * @return void
      */
     public function setLibelle(string $value)
     {
         $this->libelle = $value;
     }
 
+    /**
+     * Function getLieu
+     *
+     * @return string
+     */
     public function getLieu(): string
     {
         return $this->lieu;
     }
 
     /**
-     * @param string $value
+     * Procedure setLieu
+     *
+     * @param string $value value
+     *
+     * @return void
      */
     public function setLieu(string $value)
     {
         $this->lieu = $value;
     }
-
 }

@@ -1,4 +1,12 @@
 <?php
+/**
+ * File :        Client.php
+ * Location :    gsb_prospects/src/model/objects/Client.php
+ * PHP Version : 7.0
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
 namespace gsb_prospects\model\objects;
 
 use \InvalidArgumentException;
@@ -6,47 +14,100 @@ use \OutOfBoundsException;
 use gsb_prospects\model\objects\Praticien;
 use gsb_prospects\model\objects\Prestation;
 
-final class Client extends Praticien {
+/**
+ * Class Client
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
+final class Client extends Praticien
+{
     /**
-     * @var Prestation $lesPrestations
+     * Properties
+     * 
+     * @var int   $id_Praticien
+     * @var array $lesPrestations
      */
     private $id_Praticien;
     private $lesPrestations;
 
+    /* Methods */
+    
+    /**
+     * __construct
+     *
+     * @param int    $id                id
+     * @param string $nom               nom
+     * @param string $prenom            prenom
+     * @param string $adresse           adresse
+     * @param int    $id_Ville          id_ville (default:0)
+     * @param int    $id_Type_Praticien id_type_praticien (default:0)
+     */
     public function __construct($id, $nom, $prenom, $adresse, $id_Ville = 0, $id_Type_Praticien = 0)
     {
         parent::__construct($id, $nom, $prenom, $adresse, $id_Ville, $id_Type_Praticien);
-        $this->lesPrestations = array();
+        $this->lesPrestations = [];
     }
 
+    /**
+     * Function getIdPraticien
+     *
+     * @return int
+     */
     public function getIdPraticien()
     {
         return $this->id_Praticien;
     }
 
+    /**
+     * Function getPrestations
+     *
+     * @return array
+     */
     public function getPrestations(): array
     {
         return $this->lesPrestations;
     }
 
+    /**
+     * Procedure setPrestations
+     *
+     * @param array $array Prestations
+     *
+     * @return void
+     */
     public function setPrestations(array $array)
     {
         $this->lesPrestations = $array;
     }
 
+    /**
+     * Procedure addPrestation
+     *
+     * @param object $instance Prestation
+     *
+     * @return void
+     */
     public function addPrestation(Prestation $instance)
     {
         $this->lesPrestations[] = $instance;
     }
 
+    /**
+     * Procedure removePrestation
+     *
+     * @param mixed $prestation int or instanceof Prestation
+     *
+     * @return void
+     */
     public function removePrestation($prestation)
     {
-        if(is_int($prestation)) {
+        if (is_int($prestation)) {
             // $prestation is an index
             $index = $prestation;
             // checking index
             $isset = isset($this->lesPrestations[$prestation]);
-            if($isset === false) {
+            if ($isset === false) {
                 throw new OutOfBoundsException("index out of bounds");
             } else {
                 // removing element and resorting keys

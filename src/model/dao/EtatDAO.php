@@ -1,23 +1,40 @@
 <?php
+/**
+ * File :        EtatDAO.php
+ * Location :    gsb_prospects/src/model/dao/EtatDAO.php
+ * PHP Version : 7.0
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
 namespace gsb_prospects\model\dao;
 
 use \PDO;
 use gsb_prospects\kernel\NotImplementedException;
 use gsb_prospects\model\objects\Etat;
 
-final class EtatDAO extends AbstractDAO implements IDAO {
+/**
+ * Class EtatDAO
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
+final class EtatDAO extends AbstractDAO implements IDAO
+{
     protected $table = "etat";
     protected $class = "gsb_prospects\model\objects\Etat";
-    protected $fields = array("id", "nom");
+    protected $fields = [ "id", "nom" ];
 
     public function findFromProspect($id)
     {
         $dbh = $this->getConnexion();
         
         $query  = "SELECT `{$this->table}`.* FROM `{$this->table}`" . PHP_EOL;
-        $query .= $this->join([
-            [ "Type"=>"Inner", "Table"=>"prospect", "Foreign Table"=>"prospect", "Foreign Key"=>["id_Etat"], "Primary Table"=>"etat", "Primary Key"=>["id"] ],
-        ]);
+        $query .= $this->join(
+            [
+                [ "Type"=>"Inner", "Table"=>"prospect", "Foreign Table"=>"prospect", "Foreign Key"=>["id_Etat"], "Primary Table"=>"etat", "Primary Key"=>["id"] ],
+            ]
+        );
         $query .= "WHERE `id_Praticien` = :id;";
             
         $sth = $dbh->prepare($query);
@@ -29,10 +46,10 @@ final class EtatDAO extends AbstractDAO implements IDAO {
 
         $this->closeConnexion();
 
-        if($object === false){
+        if ($object === false) {
             $message = $sth->errorInfo()[2];    // Error Message
             $code = $sth->errorInfo()[0];       // SQLSTATE
-            if ($code != 0){
+            if ($code != 0) {
                 throw new DAOException($message, $code);
             }
         }

@@ -1,4 +1,12 @@
 <?php
+/**
+ * File :        PraticienController.php
+ * Location :    gsb_prospects/src/controller/PraticienController.php
+ * PHP Version : 7.0
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
 namespace gsb_prospects\controller;
 
 use gsb_prospects\model\dao\PraticienDAO;
@@ -9,7 +17,14 @@ use gsb_prospects\model\dao\VilleDAO;
 use gsb_prospects\model\objects\Ville;
 use gsb_prospects\view\View;
 
-final class PraticienController {
+/**
+ * Class PraticienController
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
+final class PraticienController
+{
     public function defaultAction()
     {
         $this->listAction();

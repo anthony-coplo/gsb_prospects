@@ -1,8 +1,22 @@
 <?php
+/**
+ * File :        AbstractException.php
+ * Location :    gsb_prospects/src/kernel/AbstractException.php
+ * PHP Version : 7.0
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
 namespace gsb_prospects\kernel;
 
 use \Exception;
 
+/**
+ * Class AbstractException
+ * 
+ * @author  David RIEHL <david.riehl@ac-lille.fr>
+ * @license GPL 3.0
+ */
 abstract class AbstractException extends Exception implements IException
 {
     protected $message = "Unknown exception";     // Exception message
