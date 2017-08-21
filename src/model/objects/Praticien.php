@@ -9,6 +9,7 @@
  */
 namespace gsb_prospects\model\objects;
 
+use gsb_prospects\model\dao\VilleDAO;
 use gsb_prospects\model\objects\Ville;
 use gsb_prospects\model\objects\TypePraticien;
 
@@ -156,6 +157,10 @@ class Praticien
      */
     public function getVille(): Ville
     {
+        if ($this->laVille == null) {
+            $villeDAO = new VilleDAO();
+            $this->laVille = $villeDAO->findFromPraticien($this->id);
+        }
         return $this->laVille;
     }
 
