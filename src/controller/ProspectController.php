@@ -9,6 +9,8 @@
  */
 namespace gsb_prospects\controller;
 
+use gsb_prospects\kernel\Route;
+use gsb_prospects\kernel\Router;
 use gsb_prospects\model\dao\ProspectDAO;
 use gsb_prospects\model\objects\Prospect;
 use gsb_prospects\view\View;
@@ -22,13 +24,29 @@ use gsb_prospects\view\View;
 final class ProspectController
 {
     /**
+     * __construct
+     */
+    public function __construct()
+    {
+        $this->_dao = new ProspectDAO();
+        $this->_router = new Router();
+        // 2nd level route definition
+        $this->_router->addRoute(new Route("/prospects", "ProspectController", "listAction", "prospect_list"));
+    }
+
+    /**
      * Procedure defaultAction
      *
      * @return void
      */
     public function defaultAction()
     {
-        $this->listAction();
+        $route = $this->_router->findRoute();
+        if ($route) {
+            $route->execute();
+        } else {
+            print("<p>Page inconnue.</p>" . PHP_EOL);
+        }
     }
 
     /**
@@ -38,12 +56,12 @@ final class ProspectController
      */
     public function listAction()
     {
-        $ProspectDAO = new ProspectDAO();
-
-        $objects = $ProspectDAO->findAll();
+        $basePath = $this->_router->getBasePath();
+        $objects = $this->_dao->findAll();
 
         $view = new View("Prospect_List");
         $view->bind("title", "Liste des Prospects");
+        $view->bind("basePath", $basePath);
         $view->bind("objectName", "prospect");
         $view->bind("objectNamePlural", "prospects");
         $view->bind("objects", $objects);
