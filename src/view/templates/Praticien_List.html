@@ -52,39 +52,23 @@
               <li class="active"><a href="#">Praticiens</a></li>
               <li><a href="#">Prospects</a></li>
               <li><a href="#">Clients</a></li>
-              <!--
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
-            -->
             </ul>
-            <!--
-            <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-              <li><a href="../navbar-static-top/">Static top</a></li>
-              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-            </ul>
-          -->
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1><?= $this->title; ?></h1>
-        <?php if (empty($this->objects)): ?>
-        <p>Il n'y a pas de praticien.</p>
-        <?php else: ?>
-        <div class="table-responsive" style="max-height:400px; overflow-y:auto;">
+          <h1><?= $this->title; ?></h1>
+          <?php if (empty($this->objects)): ?>
+          <p>Il n'y a pas de <?= $this->objectName ?>.</p>
+          <?php else: ?>
+          <?php if (count($this->objects) == 1): ?>
+          <p>Il y a 1 <?= $this->objectName ?>.</p>
+          <?php else: ?>
+          <p>Il y a <?= count($this->objects) ?> <?= $this->objectNamePlural ?>.</p>
+          <?php endif; ?>
+          <div class="table-responsive" style="max-height:400px; overflow-y:auto;">
           <table class="table table-hover">
             <thead>
               <tr>
@@ -109,9 +93,6 @@
           </table>
         </div>
         <?php endif; ?>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
       </div>
 
     </div> <!-- /container -->
