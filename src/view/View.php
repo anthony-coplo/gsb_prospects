@@ -73,4 +73,16 @@ final class View
     {
         return $this->_vars[$name];
     }
+
+    /**
+     * __isset
+     *
+     * @param string $name name
+     *
+     * @return mixed
+     */
+    public function __isset($name)
+    {
+        return isset($this->_vars[$name]);
+    }
 }
