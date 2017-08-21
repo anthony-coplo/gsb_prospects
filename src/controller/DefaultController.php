@@ -26,7 +26,6 @@ final class DefaultController extends AbstractController implements iController
      */
     public function __construct()
     {
-        $this->_view = null;
         $this->_dao = null;
         $this->_router = new Router();
         // 2nd level route definition
