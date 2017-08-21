@@ -25,11 +25,21 @@ use gsb_prospects\view\View;
  */
 final class PraticienController
 {
+    /**
+     * Procedure defaultAction
+     *
+     * @return void
+     */
     public function defaultAction()
     {
         $this->listAction();
     }
 
+    /**
+     * Procedure listAction
+     *
+     * @return void
+     */
     public function listAction()
     {
         $praticienDAO = new PraticienDAO();
@@ -37,7 +47,7 @@ final class PraticienController
         $villeDAO = new VilleDAO();
 
         $objects = $praticienDAO->findAll();
-        foreach($objects as $object) {
+        foreach ($objects as $object) {
             $id = $object->getId();
             $ville = $villeDAO->findFromPraticien($id);
             $object->setVille($ville);
