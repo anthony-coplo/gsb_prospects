@@ -36,6 +36,7 @@ final class Client extends Praticien
     /**
      * __construct
      *
+     * @param int    $id_Praticien      id_Praticien
      * @param int    $id                id
      * @param string $nom               nom
      * @param string $prenom            prenom
@@ -43,9 +44,10 @@ final class Client extends Praticien
      * @param int    $id_Ville          id_ville (default:0)
      * @param int    $id_Type_Praticien id_type_praticien (default:0)
      */
-    public function __construct($id, $nom, $prenom, $adresse, $id_Ville = 0, $id_Type_Praticien = 0)
+    public function __construct($id_Praticien, $id, $nom, $prenom, $adresse, $id_Ville = 0, $id_Type_Praticien = 0)
     {
         parent::__construct($id, $nom, $prenom, $adresse, $id_Ville, $id_Type_Praticien);
+        $this->id_Praticien = $id_Praticien;
         $this->lesPrestations = [];
     }
 

@@ -12,7 +12,7 @@ final class ClientTest extends TestCase
 
     protected function setUp()
     {
-        $this->object = new Client(0, "nom","prenom","adresse");
+        $this->object = new Client(0, 0, "nom","prenom","adresse");
     }
 
     public function testNew()
