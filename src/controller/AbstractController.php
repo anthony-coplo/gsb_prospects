@@ -19,11 +19,12 @@ use gsb_prospects\view\View;
  */
 abstract class AbstractController
 {
-    private $_view;
     private $_dao;
+    private $_view;
+    private $_router;
 
     /**
-     * __construct must initialize _view and _dao
+     * __construct must initialize _dao, _view and _router
      */
     abstract function __construct();
 }
