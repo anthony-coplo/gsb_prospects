@@ -45,7 +45,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><?= PROJECT_NAME ?></a>
+            <a class="navbar-brand" href="<?= $this->basePath; ?>/"><?= PROJECT_NAME ?></a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -69,7 +69,7 @@
           <?php else: ?>
           <p>Il y a <?= count($this->objects) ?> <?= $this->objectNamePlural ?>.</p>
           <?php endif; ?>
-          <div class="table-responsive" style="max-height:400px; overflow-y:auto;">
+          <div class="table-responsive table-300">
           <table class="table table-hover">
             <thead>
               <tr>
@@ -96,6 +96,11 @@
         <?php endif; ?>
       </div>
 
+      <!-- Site footer -->
+      <footer class="footer">
+          <p>&copy; 2017 GSB, Inc.</p>
+        </footer>
+  
     </div> <!-- /container -->
 
 
