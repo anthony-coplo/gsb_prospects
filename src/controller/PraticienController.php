@@ -9,6 +9,8 @@
  */
 namespace gsb_prospects\controller;
 
+use gsb_prospects\kernel\Route;
+use gsb_prospects\kernel\Router;
 use gsb_prospects\model\dao\PraticienDAO;
 use gsb_prospects\model\objects\Praticien;
 use gsb_prospects\view\View;
@@ -22,13 +24,29 @@ use gsb_prospects\view\View;
 final class PraticienController
 {
     /**
+     * __construct
+     */
+    public function __construct()
+    {
+        $this->_dao = new PraticienDAO();
+        $this->_router = new Router();
+        // 2nd level route definition
+        $this->_router->addRoute(new Route("/praticiens", "PraticienController", "listAction", "praticien_list"));
+    }
+
+    /**
      * Procedure defaultAction
      *
      * @return void
      */
     public function defaultAction()
     {
-        $this->listAction();
+        $route = $this->_router->findRoute();
+        if ($route) {
+            $route->execute();
+        } else {
+            print("<p>Page inconnue.</p>" . PHP_EOL);
+        }
     }
 
     /**
@@ -38,15 +56,18 @@ final class PraticienController
      */
     public function listAction()
     {
-        $praticienDAO = new PraticienDAO();
-
-        $objects = $praticienDAO->findAll();
-
         $view = new View("Praticien_List");
+
         $view->bind("title", "Liste des Praticiens");
         $view->bind("objectName", "praticien");
         $view->bind("objectNamePlural", "praticiens");
+
+        $basePath = $this->_router->getBasePath();
+        $view->bind("basePath", $basePath);
+
+        $objects = $this->_dao->findAll();
         $view->bind("objects", $objects);
+
         $view->display();
     }
 }
