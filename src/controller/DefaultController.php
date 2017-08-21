@@ -28,6 +28,10 @@ final class DefaultController extends AbstractController implements iController
     {
         $this->_view = null;
         $this->_dao = null;
+        $this->_router = new Router();
+        // 2nd level route definition
+        $this->_router->addRoute(new Route("/", "DefaultController", "accueilAction"));
+        $this->_router->addRoute(new Route("/accueil", "DefaultController", "accueilAction"));
     }
 
     /**
@@ -37,11 +41,7 @@ final class DefaultController extends AbstractController implements iController
      */
     public function defaultAction()
     {
-        // 2nd level route definition
-        $router = new Router();
-        $router->addRoute(new Route("/", "DefaultController", "accueilAction", "accueil"));
-        $router->addRoute(new Route("/accueil", "DefaultController", "accueilAction", "accueil"));
-        $route = $router->findRoute();
+        $route = $this->_router->findRoute();
         if ($route) {
             $route->execute();
         } else {
@@ -56,8 +56,11 @@ final class DefaultController extends AbstractController implements iController
      */
     public function accueilAction()
     {
+        $basePath = $this->_router->getBasePath();
+
         $view = new View("Accueil");
         $view->bind("title", "Accueil");
+        $view->bind("basePath", $basePath);
         $view->display();
     }
 }
