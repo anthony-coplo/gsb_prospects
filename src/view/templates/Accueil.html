@@ -12,17 +12,17 @@
     <title><?= $this->title; ?></title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= $this->basePath; ?>/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../vendor/twbs/bootstrap/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="<?= $this->basePath; ?>/../vendor/twbs/bootstrap/docs/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="view/css/gsb.css" rel="stylesheet">
+    <link href="<?= $this->basePath; ?>/view/css/gsb.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../vendor/twbs/bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="<?= $this->basePath; ?>/../vendor/twbs/bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -49,10 +49,10 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Accueil</a></li>
-              <li><a href="praticien/">Praticiens</a></li>
-              <li><a href="prospect/">Prospects</a></li>
-              <li><a href="client/">Clients</a></li>
+              <li class="active"><a href="<?= $this->basePath; ?>/">Accueil</a></li>
+              <li><a href="<?= $this->basePath; ?>/praticiens/">Praticiens</a></li>
+              <li><a href="<?= $this->basePath; ?>/prospects/">Prospects</a></li>
+              <li><a href="<?= $this->basePath; ?>/clients/">Clients</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -70,19 +70,19 @@
           <h2>Praticiens</h2>
           <p class="text-info">Retrouver tous les outils pour gérer les praticiens recensés par GSB.</p>
           <p>Ajouter, Supprimer, Mettre-à-jour un praticien.</p>
-          <p><a class="btn btn-primary" href="praticien/" role="button">Gérer les praticiens &raquo;</a></p>
+          <p><a class="btn btn-primary" href="<?= $this->basePath; ?>/praticiens/" role="button">Gérer les praticiens &raquo;</a></p>
         </div>
         <div class="col-lg-4">
           <h2>Prospects</h2>
           <p class="text-info">Retrouver tous les outils pour gérer les praticiens prospectés par GSB.</p>
           <p>Ajouter, Supprimer, Mettre-à-jour un prospect.</p>
-          <p><a class="btn btn-primary" href="prospect/" role="button">Gérer les prospects &raquo;</a></p>
+          <p><a class="btn btn-primary" href="<?= $this->basePath; ?>/prospects/" role="button">Gérer les prospects &raquo;</a></p>
         </div>
         <div class="col-lg-4">
           <h2>Clients</h2>
           <p class="text-info">Retrouver tous les outils pour gérer les praticiens clients chez GSB.</p>
           <p>Ajouter, Supprimer, Mettre-à-jour un client.</p>
-          <p><a class="btn btn-primary" href="client/" role="button">Gérer les clients &raquo;</a></p>
+          <p><a class="btn btn-primary" href="<?= $this->basePath; ?>/clients/" role="button">Gérer les clients &raquo;</a></p>
         </div>
       </div>
 
@@ -99,8 +99,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?= $this->basePath; ?>/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../vendor/twbs/bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="<?= $this->basePath; ?>/../vendor/twbs/bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
