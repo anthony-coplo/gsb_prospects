@@ -56,15 +56,17 @@ final class ProspectController
      */
     public function listAction()
     {
-        $basePath = $this->_router->getBasePath();
-        $objects = $this->_dao->findAll();
-
         $view = new View("Prospect_List");
         $view->bind("title", "Liste des Prospects");
-        $view->bind("basePath", $basePath);
         $view->bind("objectName", "prospect");
         $view->bind("objectNamePlural", "prospects");
+
+        $basePath = $this->_router->getBasePath();
+        $view->bind("basePath", $basePath);
+
+        $objects = $this->_dao->findAll();
         $view->bind("objects", $objects);
+
         $view->display();
     }
 }
