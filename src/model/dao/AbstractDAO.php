@@ -35,18 +35,20 @@ abstract class AbstractDAO
     protected $joinedTables = [];
     protected $fields = [];
 
-    private $connexion;
+    private $_connexion = null;
 
     protected function getConnexion()
     {
-        try {
-            $connexion = new PDO(self::DSN, self::USER, self::PASSWORD);
-        } catch (PDOException $e) {
-            print("<p>PDOException {$e->getCode()}</p>" . PHP_EOL);
-            print("<p>{$e->getMessage()}</p>" . PHP_EOL);
-            die();
+        if (empty($this->_connexion)) {
+            try {
+                $this->_connexion = new PDO(self::DSN, self::USER, self::PASSWORD);
+            } catch (PDOException $e) {
+                print("<p>PDOException {$e->getCode()}</p>" . PHP_EOL);
+                print("<p>{$e->getMessage()}</p>" . PHP_EOL);
+                die();
+            }
         }
-        return $connexion;
+        return $this->_connexion;
     }
 
     protected function closeConnexion()
