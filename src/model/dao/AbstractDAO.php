@@ -37,7 +37,8 @@ abstract class AbstractDAO
 
     private $connexion;
 
-    protected function getConnexion() {
+    protected function getConnexion()
+    {
         try {
             $connexion = new PDO(self::DSN, self::USER, self::PASSWORD);
         } catch (PDOException $e) {
@@ -48,7 +49,8 @@ abstract class AbstractDAO
         return $connexion;
     }
 
-    protected function closeConnexion() {
+    protected function closeConnexion()
+    {
         $connexion = null;
     }
 
