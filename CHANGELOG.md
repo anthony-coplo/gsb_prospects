@@ -1,8 +1,5 @@
 ## 0.1.1 (août 22, 2017)
-  - update CHANGELOG
-
-## 0.1.1 (août 22, 2017)
-  - mise à jour du CHANGELOG 0.1.0
+  - mise à jour du CHANGELOG
   - recommage de la classe iController à IController
   - Normalisation de la classe AbstractDAO
   - correction du fichier parameters
