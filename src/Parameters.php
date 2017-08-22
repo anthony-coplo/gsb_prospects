@@ -7,4 +7,4 @@
  * @license GPL 3.0
  */
 
- const PROJECT_NAME = "GSB Prospects";
+const PROJECT_NAME = "GSB Prospects";
