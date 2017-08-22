@@ -1,3 +1,11 @@
+## 0.1.1 (août 22, 2017)
+  - update CHANGELOG 0.1.0
+  - rename iController to IController
+  - normalize AbstractDAO
+  - update parameters file
+  - normalize Controller
+  - update .gitignore
+
 ## 0.1.0 (août 22, 2017)
   - Controller Praticien, Prospect, Client
   - Fichier Template Liste des Praticiens, des Prospects, des Clients
