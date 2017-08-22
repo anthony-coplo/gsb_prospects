@@ -1,10 +1,10 @@
 ## 0.1.1 (août 22, 2017)
-  - update CHANGELOG 0.1.0
-  - rename iController to IController
-  - normalize AbstractDAO
-  - update parameters file
-  - normalize Controller
-  - update .gitignore
+  - mise à jour du CHANGELOG 0.1.0
+  - recommage de la classe iController à IController
+  - Normalisation de la classe AbstractDAO
+  - correction du fichier parameters
+  - Normalisation des Controller
+  - mise à jour du fichier .gitignore
 
 ## 0.1.0 (août 22, 2017)
   - Controller Praticien, Prospect, Client
