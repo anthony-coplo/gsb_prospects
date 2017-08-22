@@ -21,7 +21,7 @@ use gsb_prospects\view\View;
  * @author  David RIEHL <david.riehl@ac-lille.fr>
  * @license GPL 3.0
  */
-final class ProspectController extends AbstractController implements iController
+final class ProspectController extends AbstractController implements IController
 {
     /**
      * __construct
