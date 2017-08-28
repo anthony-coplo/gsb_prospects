@@ -86,8 +86,8 @@
                 <td><?= $object->getNom(); ?></td>
                 <td><?= $object->getPrenom(); ?></td>
                 <td><?= $object->getAdresse(); ?></td>
-                <td><?= $object->getVille()->getCodePostal(); ?></td>
-                <td><?= $object->getVille()->getNom(); ?></td>
+                <td><?= ($object->getVille() == null)?"":$object->getVille()->getCodePostal(); ?></td>
+                <td><?= ($object->getVille() == null)?"":$object->getVille()->getNom(); ?></td>
               </tr>
             <?php endforeach; ?>
             </tbody>
