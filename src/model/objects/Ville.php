@@ -15,7 +15,7 @@
  * @author  David RIEHL <david.riehl@ac-lille.fr>
  * @license GPL 3.0
  */
-final class Ville
+final class Ville extends AbstractObject
 {
     private $id;
     private $nom;
@@ -45,6 +45,18 @@ final class Ville
         return $this->id;
     }
 
+    /**
+     * Procedure setId
+     *
+     * @param string $value value
+     *
+     * @return void
+     */
+    public function setId(string $value)
+    {
+        $this->id = $value;
+    }
+  
     /**
      * Fonction getNom
      *

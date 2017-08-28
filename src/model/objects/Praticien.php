@@ -19,7 +19,7 @@ use gsb_prospects\model\objects\TypePraticien;
  * @author  David RIEHL <david.riehl@ac-lille.fr>
  * @license GPL 3.0
  */
-class Praticien
+class Praticien extends AbstractObject
 {
     /**
      * Properties
@@ -74,6 +74,18 @@ class Praticien
         return $this->id;
     }
 
+    /**
+     * Procedure setId
+     *
+     * @param string $value value
+     *
+     * @return void
+     */
+    public function setId(string $value)
+    {
+        $this->id = $value;
+    }
+ 
     /**
      * Function getNom
      * 
