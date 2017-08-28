@@ -42,10 +42,10 @@ final class Prospect extends Praticien
      * @param string $nom               nom
      * @param string $prenom            prenom
      * @param string $adresse           adresse
-     * @param int    $id_Ville          id_Ville (default:0)
-     * @param int    $id_Type_Praticien id_Type_Praticien (default:0)
+     * @param int    $id_Ville          id_Ville (default:null)
+     * @param int    $id_Type_Praticien id_Type_Praticien (default:null)
      */
-    public function __construct($id_Praticien, $id_Etat, $id, $nom, $prenom, $adresse, $id_Ville = 0, $id_Type_Praticien = 0)
+    public function __construct($id_Praticien, $id_Etat, $id, $nom, $prenom, $adresse, $id_Ville = null, $id_Type_Praticien = null)
     {
         parent::__construct($id, $nom, $prenom, $adresse, $id_Ville, $id_Type_Praticien);
         $this->id_Praticien = $id_Praticien;
