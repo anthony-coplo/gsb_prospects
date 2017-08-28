@@ -40,7 +40,7 @@ final class TypePraticien extends AbstractObject
      * @param string $libelle libelle
      * @param string $lieu    lieu
      */
-    public function __construct($id, $code, $libelle, $lieu)
+    public function __construct($id, string $code, string $libelle, string $lieu)
     {
         $this->id      = $id;
         $this->code    = $code;

@@ -44,7 +44,7 @@ final class Client extends Praticien
      * @param int    $id_Ville          id_ville (default:null)
      * @param int    $id_Type_Praticien id_type_praticien (default:null)
      */
-    public function __construct($id_Praticien, $id, $nom, $prenom, $adresse, $id_Ville = null, $id_Type_Praticien = null)
+    public function __construct($id_Praticien, $id, string $nom, string $prenom, string $adresse, $id_Ville = null, $id_Type_Praticien = null)
     {
         parent::__construct($id, $nom, $prenom, $adresse, $id_Ville, $id_Type_Praticien);
         $this->id_Praticien = $id_Praticien;

@@ -28,10 +28,10 @@ final class Ville extends AbstractObject
      * @param string $nom         nom
      * @param string $code_postal code postal
      */
-    public function __construct($id, $nom, $code_postal)
+    public function __construct($id, string $nom, string $code_postal)
     {
-        $this->id         = $id;
-        $this->nom        = $nom;
+        $this->id          = $id;
+        $this->nom         = $nom;
         $this->code_postal = $code_postal;
     }
 

@@ -167,9 +167,9 @@ class Praticien extends AbstractObject
      *
      * @return object
      */
-    public function getVille(): Ville
+    public function getVille()
     {
-        if ($this->laVille == null) {
+        if ($this->id_Ville != null && $this->laVille == null) {
             $villeDAO = new VilleDAO();
             $this->laVille = $villeDAO->findFromPraticien($this->id);
         }
@@ -203,7 +203,7 @@ class Praticien extends AbstractObject
      *
      * @return object
      */
-    public function getTypePraticien(): TypePraticien
+    public function getTypePraticien()
     {
         return $this->leTypePraticien;
     }

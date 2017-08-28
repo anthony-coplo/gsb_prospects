@@ -34,7 +34,7 @@ final class Etat extends AbstractObject
      * @param int    $id  id
      * @param string $nom nom
      */
-    public function __construct($id, $nom)
+    public function __construct($id, string $nom)
     {
         $this->id  = $id;
         $this->nom = $nom;
