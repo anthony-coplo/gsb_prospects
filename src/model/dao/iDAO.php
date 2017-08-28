@@ -20,7 +20,7 @@ interface IDAO
     function delete($object);   // delete an object from database
     function find($id);         // find   an object by id
     function findAll();         // find all objects from database
-    function insert($object);   // add    an object in   database
+    function insert(&$object);   // add    an object in   database
     function update($object);   // update an object in   database
 }
 ?>

@@ -161,5 +161,56 @@ abstract class AbstractDAO
 
         return $objects;
     }
+
+    public function insert(&$object)
+    {
+        $fields_count = count($this->fields);
+        $object_vars = $object->get_object_vars();
+        $dbh = $this->getConnexion();
+        
+        $query  = "INSERT INTO `{$this->table}`" . PHP_EOL;
+        $query .= "(";
+        foreach ($this->fields as $index => $field) {
+            $query .= "`{$field}`";
+            if ($index < $fields_count - 1) {
+                $query .= ", ";
+            }
+        }
+        $query .= ")" . PHP_EOL;
+        $query .= "VALUES" . PHP_EOL;
+        $query .= "(";
+        foreach ($this->fields as $index => $field) {
+            if ($object_vars[$field] === null) {
+                $query .= "NULL";
+            } else {
+                $query .= ":{$field}";
+            }
+            if ($index < $fields_count - 1) {
+                $query .= ", ";
+            }
+        }
+        $query .= ");";
+        
+        $sth = $dbh->prepare($query);
+        foreach ($this->fields as $index => $field) {
+            if ($object_vars[$field] != null) {
+                $sth->bindParam(":{$field}", $object_vars[$field]);
+            }
+        }
+
+        var_dump($sth);
+
+        $result = $sth->execute();
+        if ($result) {
+            $id = $dbh->lastInsertId();
+            $object->SetId($id);
+        } else {
+            throw new PDOException($sth->errorInfo()[2]);
+        }
+
+        $this->closeConnexion();
+        
+        return $result;
+    }
 }
 ?>
