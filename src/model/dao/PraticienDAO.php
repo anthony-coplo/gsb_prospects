@@ -31,9 +31,4 @@ final class PraticienDAO extends AbstractDAO implements IDAO
     {
         throw new NotImplementedException();
     }
-
-    public function update($object)
-    {
-        throw new NotImplementedException();
-    }
 }

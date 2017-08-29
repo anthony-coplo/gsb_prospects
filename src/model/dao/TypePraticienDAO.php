@@ -57,11 +57,6 @@ final class TypePraticienDAO extends AbstractDAO implements IDAO
         return $object;
     }
 
-    public function delete($object)
-    {
-        throw new NotImplementedException();
-    }
-
     public function update($object)
     {
         throw new NotImplementedException();

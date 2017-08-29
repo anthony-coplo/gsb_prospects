@@ -267,5 +267,56 @@ abstract class AbstractDAO
         
         return $result;
     }
+
+    /**
+     * Function update
+     * Generate a UPDATE query to update an object in a table
+     *
+     * @param object $object
+     *
+     * @return bool true if query succeded
+     */
+    public function update($object)
+    {
+        $fields_count = count($this->fields);
+        $object_vars = $object->get_object_vars();
+        
+        $query  = "UPDATE `{$this->table}` SET" . PHP_EOL;
+        foreach ($this->fields as $index => $field) {
+            if ($field != "id") {
+                $query .= "`{$field}` = ";
+                if ($object_vars[$field] === null) {
+                    $query .= "NULL";
+                } else {
+                    $query .= ":{$field}";
+                }
+                if ($index < $fields_count - 1) {
+                    $query .= ",";
+                }
+                $query .= PHP_EOL;
+            }
+        }
+        $query .= "WHERE `id` = :id;";
+         
+        $dbh = $this->getConnexion();
+        $sth = $dbh->prepare($query);
+        foreach ($this->fields as $index => $field) {
+            if ($object_vars[$field] != null) {
+                $sth->bindParam(":{$field}", $object_vars[$field]);
+            }
+        }
+        $result = $sth->execute();
+        $this->closeConnexion();
+        
+        if (!$result) {
+            $message = $sth->errorInfo()[2];    // Error Message
+            $code = $sth->errorInfo()[0];       // SQLSTATE
+            if ($code != 0) {
+                throw new DAOException($message, $code);
+            }
+        }
+        
+        return $result;
+    }
 }
 ?>
