@@ -26,9 +26,4 @@ final class PraticienDAO extends AbstractDAO implements IDAO
     protected $fields = [ 
         "id", "nom", "prenom", "adresse", "id_Ville", "id_Type_Praticien" 
     ];
-
-    public function delete($object)
-    {
-        throw new NotImplementedException();
-    }
 }

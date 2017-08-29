@@ -318,5 +318,39 @@ abstract class AbstractDAO
         
         return $result;
     }
+
+    /**
+     * Function delete
+     * Generate a DELETE FROM query to delete an object from a table
+     *
+     * @param object $object
+     *
+     * @return bool true if query succeded
+     */
+    public function delete(&$object)
+    {
+        $id = $object->getId();
+
+        $query  = "DELETE FROM `{$this->table}`" . PHP_EOL;
+        $query .= "WHERE `id` = :id;";
+        
+        $dbh = $this->getConnexion();
+        $sth = $dbh->prepare($query);
+        $sth->bindParam(":id", $id);
+        $result = $sth->execute();
+        $this->closeConnexion();
+        
+        if (!$result) {
+            $message = $sth->errorInfo()[2];    // Error Message
+            $code = $sth->errorInfo()[0];       // SQLSTATE
+            if ($code != 0) {
+                throw new DAOException($message, $code);
+            } else {
+                unset($object);
+            }
+        }
+        
+        return $result;
+    }
 }
 ?>

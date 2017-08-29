@@ -64,9 +64,4 @@ final class PrestationDAO extends AbstractDAO implements IDAO
 
         return $objects;
     }
-
-    public function update($object)
-    {
-        throw new NotImplementedException();
-    }
 }

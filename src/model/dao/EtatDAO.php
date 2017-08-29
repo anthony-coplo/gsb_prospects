@@ -56,9 +56,4 @@ final class EtatDAO extends AbstractDAO implements IDAO
 
         return $object;
     }
-
-    public function delete($object)
-    {
-        throw new NotImplementedException();
-    }
 }

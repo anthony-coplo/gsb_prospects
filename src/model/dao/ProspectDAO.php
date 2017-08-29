@@ -31,7 +31,7 @@ final class ProspectDAO extends AbstractDAO implements IDAO
         "id_Praticien", "id_Etat", "id", "nom", "prenom", "adresse", "id_Ville", "id_Type_Praticien"
     ];
     
-    public function delete($object)
+    public function delete(&$object)
     {
         throw new NotImplementedException();
     }
@@ -71,7 +71,7 @@ final class ProspectDAO extends AbstractDAO implements IDAO
         return $objects;
     }
 
-    public function insert($object)
+    public function insert(&$object)
     {
         throw new NotImplementedException();
     }
