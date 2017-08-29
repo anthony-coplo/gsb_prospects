@@ -37,6 +37,12 @@ abstract class AbstractDAO
 
     private $_connexion = null;
 
+    /**
+     * Function getConnexion
+     * Open database connection and return database connection handler (dbh)
+     *
+     * @return object PDO connection
+     */
     protected function getConnexion()
     {
         if (empty($this->_connexion)) {
@@ -51,11 +57,28 @@ abstract class AbstractDAO
         return $this->_connexion;
     }
 
+    /**
+     * Procedure closeConnexion
+     * Close database connection
+     *
+     * @return void
+     */
     protected function closeConnexion()
     {
         $connexion = null;
     }
 
+    /**
+     * Function join
+     * generate sql join
+     *
+     * @param array $joinedTables join items :
+     *                            type, table to join, 
+     *                            foreign table, foreign key, 
+     *                            primary table, primary key
+     *
+     * @return string join query
+     */
     protected function join($joinedTables = []): string
     {
         // Structure : [ "Type"=>"", "Table"=>"", "Foreign Table"=>"", "Foreign Key"=>[], "Primary Table"=>"", "Primary Key"=>[] ]
@@ -102,25 +125,45 @@ abstract class AbstractDAO
         return $str;
     }
 
+    /**
+     * Function find
+     * Generate a SELECT query to find item by id
+     *
+     * @param int $id id to find
+     *
+     * @return object instanceof $this->class
+     */
     public function find($id)
     {
-        $dbh = $this->getConnexion();
-
+        /* Generate SQL query */
         $query  = "SELECT * FROM `{$this->table}`" . PHP_EOL;
         if (! empty($this->joinedTables)) {
             $query .= $this->join();
         }
         $query .= "WHERE `id` = :id;";
         
+        /* Open connection */
+        $dbh = $this->getConnexion();
+
+        /* Prepare statement */
         $sth = $dbh->prepare($query);
+
+        /* Bind Parameters */
         $sth->bindParam(":id", $id);
+
+        /* Configure object hydratation */
         $sth->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->class, $this->fields);
+
+        /* Execute query */
         $sth->execute();
 
+        /* Fetch a row, create and hydrate object instance */
         $object = $sth->fetch();
 
+        /* Close connection */
         $this->closeConnexion();
 
+        /* Check error */
         if (! $object) {
             $message = $sth->errorInfo()[2];    // Error Message
             $code = $sth->errorInfo()[0];       // SQLSTATE
@@ -133,22 +176,25 @@ abstract class AbstractDAO
         return $object;
     }
 
+    /**
+     * Function findAll
+     * Generate a SELECT query to find all items from a table
+     *
+     * @return array collection of objects instanceof $this->class
+     */
     public function findAll()
     {
-        $dbh = $this->getConnexion();
-
         $query = "SELECT * FROM `{$this->table}`;" . PHP_EOL;
         if (! empty($this->joinedTables)) {
             $query .= $this->join();
         }
         $query .= ";";
         
+        $dbh = $this->getConnexion();
         $sth = $dbh->prepare($query);
         $sth->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $this->class, $this->fields);
         $sth->execute();
-
         $objects = $sth->fetchAll();
-
         $this->closeConnexion();
 
         if (! $objects) {
@@ -162,11 +208,18 @@ abstract class AbstractDAO
         return $objects;
     }
 
+    /**
+     * Function insert
+     * Generate a INSERT INTO query to record an object in a table
+     *
+     * @param object $object by reference
+     *
+     * @return bool true if query succeded
+     */
     public function insert(&$object)
     {
         $fields_count = count($this->fields);
         $object_vars = $object->get_object_vars();
-        $dbh = $this->getConnexion();
         
         $query  = "INSERT INTO `{$this->table}`" . PHP_EOL;
         $query .= "(";
@@ -191,24 +244,26 @@ abstract class AbstractDAO
         }
         $query .= ");";
         
+        $dbh = $this->getConnexion();
         $sth = $dbh->prepare($query);
         foreach ($this->fields as $index => $field) {
             if ($object_vars[$field] != null) {
                 $sth->bindParam(":{$field}", $object_vars[$field]);
             }
         }
-
-        var_dump($sth);
-
         $result = $sth->execute();
-        if ($result) {
+        $this->closeConnexion();
+        
+        if (!$result) {
+            $message = $sth->errorInfo()[2];    // Error Message
+            $code = $sth->errorInfo()[0];       // SQLSTATE
+            if ($code != 0) {
+                throw new DAOException($message, $code);
+            }
+        } else {
             $id = $dbh->lastInsertId();
             $object->SetId($id);
-        } else {
-            throw new PDOException($sth->errorInfo()[2]);
         }
-
-        $this->closeConnexion();
         
         return $result;
     }
