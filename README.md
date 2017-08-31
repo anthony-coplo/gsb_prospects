@@ -22,3 +22,7 @@ French flag by [Freepik]("http://www.freepik.com") from [www.flaticon.com]("http
   * Liste des prospects
 * Clients
   * Liste des clients
+
+## Contribute
+
+See the [CONTRIBUTING.md](CONTRIBUTING.md) file.
